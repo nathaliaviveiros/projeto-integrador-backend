@@ -10,7 +10,7 @@ import {
 import { usuariosCadastrados } from './usuario.service.js';
 import { criaUsuarioDTO } from './dto/criaUsuario.dto.js';
 import { alteraUsuarioDTO } from './dto/alteraUsuario.dto.js';
-import { LoginUsuarioDTO } from './dto/loginUsuario.dto.js';
+import { LoginUsuarioDTO } from './dto/login.dto.js';
  
 @Controller('/usuarios')
 export class UsuarioController {
@@ -57,14 +57,14 @@ export class UsuarioController {
   async retornarUsuarios() {
     return {
       message: 'Consulta efetuada',
-      usuarios: this.usuarios.retornaUsuarios(),
+      usuarios: this.usuarios.retornarUsuarios(),
     };
   }
  
   @Get('/:id')
   async retornarUsuarioID(@Param('id') id: string) {
     // fazer consulta por id
-    let resultado = this.usuarios.retornaUsuarioID(id);
+    let resultado = this.usuarios.retornarUsuarioPorID(id);
  
     if (resultado) {
       return {
