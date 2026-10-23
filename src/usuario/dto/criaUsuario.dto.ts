@@ -5,23 +5,21 @@ export class criaUsuarioDTO {
   @IsString()
     nome!: string;
   
-  @IsNumber()
-    idade!: number;
+  @IsEmail()
+  @IsString()
+  email!: string;
+
+  @MinLength(6)
+  @IsString()
+    senha: string;
+
+  @IsString()
+    cpf: string;
  
   @IsString()
-    cidade!: string;
+    dataNascimento: string;
  
-  @IsEmail()
-    @IsString()
-    email!: string;
  
   @IsString()
     telefone!: string;
- 
-  @MinLength(6)
-    @IsString()
-    senha!: string;
- 
-  @IsString()
-    endereco!: string;
 }

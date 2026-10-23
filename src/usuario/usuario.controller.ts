@@ -26,7 +26,10 @@ export class UsuarioController {
           id: usuario.id,
           nome: usuario.nome,
           email: usuario.email,
-          cidade: usuario.cidade,
+          senha: usuario.senha,
+          cpf: usuario.cpf,
+          dataNascimento: usuario.dataNascimento,
+          telefone: usuario.telefone,
         },
       };
     } else {

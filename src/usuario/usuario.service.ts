@@ -11,12 +11,11 @@ export class usuariosCadastrados {
     let usuario = new Usuario(
       uuid(),
       dadosUsuario.nome,
-      dadosUsuario.idade,
-      dadosUsuario.cidade,
       dadosUsuario.email,
-      dadosUsuario.telefone,
       dadosUsuario.senha,
-      dadosUsuario.endereco,
+      dadosUsuario.cpf,
+      dadosUsuario.dataNascimento,
+      dadosUsuario.telefone,
     );
  
     this.#usuarios.push(usuario);
