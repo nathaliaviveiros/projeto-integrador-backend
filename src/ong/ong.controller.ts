@@ -7,26 +7,31 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { usuariosCadastrados } from './usuario.service.js';
-import { criaUsuarioDTO } from './dto/criaUsuario.dto.js';
-import { alteraUsuarioDTO } from './dto/alteraUsuario.dto.js';
-import { LoginUsuarioDTO } from './dto/login.dto.js';
+import { ongCadastrados } from './usuario.service.js';
+import { criaOngDTO } from './dto/criaUsuario.dto.js';
+import { alteraOngDTO } from './dto/alteraUsuario.dto.js';
+import { LoginOngDTO } from './dto/login.dto.js';
  
-@Controller('/usuarios')
-export class UsuarioController {
-  constructor(private usuarios: usuariosCadastrados) {}
+@Controller('/ong')
+export class OngController {
+  constructor(private ong: ongCadastrados) {}
  
   @Post('/login')
-  async loginUsuario(@Body() login: LoginUsuarioDTO) {
-    const usuario = await this.usuarios.validaLogin(login.email, login.senha);
-    if (usuario) {
+  async loginOng(@Body() login: LoginOngDTO) {
+    const ong = await this.ong.validaLogin(login.email, login.senha);
+    if (ong) {
       return {
         message: 'Login efetuado com sucesso',
         usuario: {
-          id: usuario.id,
-          nome: usuario.nome,
-          email: usuario.email,
-          cidade: usuario.cidade,
+          id: ong.id,
+          nome: ong.nome,
+          razaosocial: ong.razaosocial,
+          cnpj: ong.cnpj,
+          email: ong.email,
+          senha: ong.senha,
+          telefone: ong.telefone,
+          endereco: ong.endereco,
+          cidade: ong.cidade,
         },
       };
     } else {
@@ -38,8 +43,8 @@ export class UsuarioController {
   }
  
   @Post()
-  async cadastroUsuario(@Body() dadosUsuario: criaUsuarioDTO) {
-    let retorno = this.usuarios.adicionaUsuario(dadosUsuario);
+  async cadastroOng(@Body() dadosOng: criaOngDTO) {
+    let retorno = this.ong.adicionaOng(dadosOng);
     if (retorno) {
       return {
         message: 'cadastro efetuado com sucesso',
@@ -54,45 +59,45 @@ export class UsuarioController {
   }
  
   @Get()
-  async retornarUsuarios() {
+  async retornarOng() {
     return {
       message: 'Consulta efetuada',
-      usuarios: this.usuarios.retornarUsuarios(),
+      usuarios: this.ong.retornarOng(),
     };
   }
  
   @Get('/:id')
-  async retornarUsuarioID(@Param('id') id: string) {
+  async retornarOngID(@Param('id') id: string) {
     // fazer consulta por id
-    let resultado = this.usuarios.retornarUsuarioPorID(id);
+    let resultado = this.ong.retornarOngPorID(id);
  
     if (resultado) {
       return {
-        message: 'usuario localizado',
+        message: 'Ong localizado',
         id: resultado,
       };
     } else {
       return {
-        message: 'usuario não localizado',
+        message: 'Ong não localizado',
         id: null,
       };
     }
   }
  
   @Put('/:id')
-  async atualizaUsuario(
+  async atualizaOng(
     @Param('id') id: string,
-    @Body() novosDados: alteraUsuarioDTO,
+    @Body() novosDados: alteraOngDTO,
   ) {
-    const retorno = await this.usuarios.atualizaUsuario(id, novosDados);
+    const retorno = await this.ong.atualizaOng(id, novosDados);
     if (retorno) {
       return {
-        message: 'usuario atualizado',
+        message: 'Ong atualizado',
         id: retorno,
       };
     } else {
       return {
-        message: 'usuario não atualizado',
+        message: 'Ong não atualizado',
         id: null,
       };
     }

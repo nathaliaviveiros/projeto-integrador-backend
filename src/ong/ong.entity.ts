@@ -3,30 +3,33 @@ import * as bcrypt from 'bcrypt';
 export class Usuario {
   id: string;
   nome: string;
-  idade: number;
-  cidade: string;
+  razaosocial: string;
+  cnpj: string;
   email: string;
-  telefone: string;
   senha: string;
+  telefone: string;
+  cidade: string;
   endereco: string;
 
   constructor(
     id: string,
     nome: string,
-    idade: number,
-    cidade: string,
+    razaosocial: string,
+    cnpj: string,
     email: string,
-    telefone: string,
     senha: string,
+    telefone: string,
+    cidade: string,
     endereco: string,
   ) {
     this.id = id;
     this.nome = nome;
-    this.idade = idade;
-    this.cidade = cidade;
+    this.razaosocial = razaosocial;
+    this.cnpj = cnpj;
     this.email = email;
-    this.telefone = telefone;
     this.senha = senha;
+    this.telefone = telefone;
+    this.cidade = cidade;
     this.endereco = endereco;
   }
 

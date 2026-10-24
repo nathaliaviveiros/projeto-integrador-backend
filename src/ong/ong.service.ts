@@ -4,91 +4,84 @@ import {v4 as uuid} from 'uuid';
 import { alteraUsuarioDTO } from './dto/alteraUsuario.dto.js';
  
 @Injectable()
-export class usuariosCadastrados {
-  #usuarios: Usuario[] = [];
+export class ongCadastrados {
+  #ong: Ong[] = [];
  
-  adicionaUsuario(dadosUsuario: any) {
-    let usuario = new Usuario(
+  adicionaOng(dadosOng: any) {
+    let ong = new Ong(
       uuid(),
-      dadosUsuario.nome,
-      dadosUsuario.idade,
-      dadosUsuario.cidade,
-      dadosUsuario.email,
-      dadosUsuario.telefone,
-      dadosUsuario.senha,
-      dadosUsuario.endereco,
+      dadosOng.nome,
+      dadosOng.razaosocial,
+      dadosOng.cnpj,
+      dadosOng.email,
+      dadosOng.senha,
+      dadosOng.telefone,
+      dadosOng.endereco,
+      dadosOng.cidade,
 
-      id: string;
-  nome: string;
-  idade: number;
-  cidade: string;
-  email: string;
-  telefone: string;
-  senha: string;
-  endereco: string
     );
  
-    this.#usuarios.push(usuario);
-    return usuario.id;
+    this.#ong.push(ong);
+    return ong.id;
   }
  
-  retornarUsuarios() {
-    return this.#usuarios;
+  retornarOng() {
+    return this.#ong;
   }
  
-  retornarUsuarioPorID(id:string) {
-    const possivelusuario = this.#usuarios.find(
-        usuarioSalvo => usuarioSalvo.id === id
+  retornarOngPorID(id:string) {
+    const possivelong = this.#ong.find(
+        ongSalvo => ongSalvo.id === id
     )
-    if(!possivelusuario){
-      throw new Error('Usuario não localizado')
+    if(!possivelong){
+      throw new Error('Ong não localizado')
     }
-    return possivelusuario;
+    return possivelong;
   }
 
   async validaEmail(email: string){
-    const possivelusuario = this.#usuarios.find(
-      usuario => usuario.email === email
+    const possivelong = this.#ong.find(
+      ong => ong.email === email
     );
   }
-  async atualizaUsuario(id: string, dadosAtualizacao: alteraUsuarioDTO){
-    let possivelUsuario = this.retornarUsuarioPorID(id);
-    Object.entries(dadosAtualizacao).forEach(([chave,valor]) =>{
+  async atualizaOng(id: string, dadosOng: alteraOngDTO){
+    let possivelong = this.retornarOngPorID(id);
+    Object.entries(dadosOng).forEach(([chave,valor]) =>{
       if (chave == 'id'){
         return;
       }else if (valor === undefined){
         return;
       }else if (chave === undefined){
-        possivelUsuario.trocaSenha(valor)
+        possivelOng.trocaSenha(valor)
       }
-      (possivelUsuario as any) [chave] = valor;
+      (possivelOng as any) [chave] = valor;
     }
   )
-  return possivelUsuario.id;
+  return possivelOng.id;
   }
 
-  async apagaUsuario(id:string){
-    let possivelUsuario = this.retornarUsuarioPorID(id)
+  async apagaOng(id:string){
+    let possivelOng = this.retornarOngPorID(id)
 
-    this.#usuarios = this.#usuarios.filter(
-      usuarioSalvo => usuarioSalvo.id !==id
+    this.#ong = this.#ong.filter(
+      ongSalvo => ongSalvo.id !==id
     )
   }
 
   async buscaEmail(email: string){
-    const possivelUsuario = this.#usuarios.find(
-      usuario => usuario.email === email
+    const possivelOng = this.#ong.find(
+      ong => ong.email === email
     );
-    if(!possivelUsuario){
-      throw new Error('Usuario não localizado')
+    if(!possivelOng){
+      throw new Error('Ong não localizado')
     }
-    return possivelUsuario;
+    return possivelOng;
     }
 
   async validaLogin(email:string, senha:string){
-    const possivelUsuario = await this.buscaEmail(email)
-    if (possivelUsuario.login(senha)){
-      return possivelUsuario;
+    const possivelOng = await this.buscaEmail(email)
+    if (possivelOng.login(senha)){
+      return possivelOng;
     }else{
       return null;
     }
