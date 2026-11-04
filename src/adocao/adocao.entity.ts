@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 
-export class adocao {
+export class Adocao {
   id_adocao: string;
   id_pet: string;
   id_ong: string;

@@ -7,10 +7,8 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ongCadastrados } from './usuario.service.js';
-import { criaOngDTO } from './dto/criaUsuario.dto.js';
-import { alteraOngDTO } from './dto/alteraUsuario.dto.js';
-import { LoginOngDTO } from './dto/login.dto.js';
+import { ongCadastrados } from './ong.service.js';
+
  
 @Controller('/ong')
 export class OngController {
@@ -104,8 +102,8 @@ export class OngController {
   }
  
   @Delete('/:id')
-  async removeUsuario(@Param('id') id: string) {
-    const usuarioRemovido = await this.usuarios.apagaUsuario(id);
+  async removeOng(@Param('id') id: string) {
+    const usuarioRemovido = await this.ong.apagaOng(id);
     return {
       usuario: usuarioRemovido,
       message: 'Usuario removido.',

@@ -1,98 +1,45 @@
 import { Injectable } from '@nestjs/common';
-import { Usuario } from './usuario.entity.js';
-import {v4 as uuid} from 'uuid';
-import { alteraUsuarioDTO } from './dto/alteraUsuario.dto.js';
-import { adocao } from './adocao.entity.js';
- 
+import { v4 as uuid } from 'uuid';
+import { Adocao } from './adocao.entity.js';
+
+
 @Injectable()
-export class adocaoEfetuada {
-  #ong: adocao[] = [];
- 
+export class adocaoCadastrados {
+  #adocao: Adocao[] = [];
+
   adicionaAdocao(dadosAdocao: any) {
     let adocao = new Adocao(
       uuid(),
-      dadosOng.nome,
-      dadosOng.razaosocial,
-      dadosOng.cnpj,
-      dadosOng.email,
-      dadosOng.senha,
-      dadosOng.telefone,
-      dadosOng.endereco,
-      dadosOng.cidade,
-
-  id_adocao: string;
-  id_pet: string;
-  id_ong: string;
-  id_usuario: string;
-  tutor: string;
-  data: string;
-
+      dadosAdocao.id_pet,
+      dadosAdocao.id_ong,
+      dadosAdocao.id_usuario,
+      dadosAdocao.tutor,
+      dadosAdocao.data,
     );
- 
+
     this.#adocao.push(adocao);
-    return adocao.id;
-  }
- 
-  retornarOng() {
-    return this.#ong;
-  }
- 
-  retornarOngPorID(id:string) {
-    const possivelong = this.#ong.find(
-        ongSalvo => ongSalvo.id === id
-    )
-    if(!possivelong){
-      throw new Error('Ong não localizado')
-    }
-    return possivelong;
+    return adocao.id_adocao;
   }
 
-  async validaEmail(email: string){
-    const possivelong = this.#ong.find(
-      ong => ong.email === email
-    );
-  }
-  async atualizaOng(id: string, dadosOng: alteraOngDTO){
-    let possivelong = this.retornarOngPorID(id);
-    Object.entries(dadosOng).forEach(([chave,valor]) =>{
-      if (chave == 'id'){
-        return;
-      }else if (valor === undefined){
-        return;
-      }else if (chave === undefined){
-        possivelOng.trocaSenha(valor)
-      }
-      (possivelOng as any) [chave] = valor;
-    }
-  )
-  return possivelOng.id;
+  retornarAdocao() {
+    return this.#adocao;
   }
 
-  async apagaOng(id:string){
-    let possivelOng = this.retornarOngPorID(id)
+  async apagaAdocao(id: string) {
+    let possivelOng = this.retornarAdocaoPorID(id)
 
-    this.#ong = this.#ong.filter(
-      ongSalvo => ongSalvo.id !==id
+    this.#adocao = this.#adocao.filter(
+      adocaoSalvo => adocaoSalvo.id_adocao !== id
     )
   }
 
-  async buscaEmail(email: string){
-    const possivelOng = this.#ong.find(
-      ong => ong.email === email
-    );
-    if(!possivelOng){
-      throw new Error('Ong não localizado')
+  retornarAdocaoPorID(id: string) {
+    const possivelAdocao = this.#adocao.find(
+      adocaoSalvo => adocaoSalvo.id_adocao === id
+    )
+    if (!possivelAdocao) {
+      throw new Error('Adoção não localizado')
     }
-    return possivelOng;
-    }
-
-  async validaLogin(email:string, senha:string){
-    const possivelOng = await this.buscaEmail(email)
-    if (possivelOng.login(senha)){
-      return possivelOng;
-    }else{
-      return null;
-    }
+    return possivelAdocao;
   }
-
 }

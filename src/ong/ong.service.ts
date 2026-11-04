@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { Usuario } from './usuario.entity.js';
 import {v4 as uuid} from 'uuid';
-import { alteraUsuarioDTO } from './dto/alteraUsuario.dto.js';
+import { Ong } from './ong.entity.js';
  
 @Injectable()
 export class ongCadastrados {
   #ong: Ong[] = [];
  
-  adicionaOng(dadosOng: any) {
+  adicionaOng(dadosOng: criaOngDTO) {
     let ong = new Ong(
       uuid(),
       dadosOng.nome,
@@ -45,7 +44,7 @@ export class ongCadastrados {
     );
   }
   async atualizaOng(id: string, dadosOng: alteraOngDTO){
-    let possivelong = this.retornarOngPorID(id);
+    let possivelOng = this.retornarOngPorID(id);
     Object.entries(dadosOng).forEach(([chave,valor]) =>{
       if (chave == 'id'){
         return;

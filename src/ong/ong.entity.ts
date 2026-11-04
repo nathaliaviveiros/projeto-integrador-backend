@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 
-export class Usuario {
+export class Ong {
   id: string;
   nome: string;
   razaosocial: string;
