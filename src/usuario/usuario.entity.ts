@@ -5,26 +5,35 @@ export class Usuario {
   nome: string;
   email: string;
   senha: string;
+  confirmarSenha:string
   cpf: string;
   dataNascimento: string;
   telefone: string;
+  isUsuario:boolean;
+  isOng:boolean;
 
   constructor(
   id: string,
   nome: string,
   email: string,
   senha: string,
+  confirmarSenha:string,
   cpf: string,
   dataNascimento: string,
   telefone: string,
+  isUsuario:boolean,
+  isOng:boolean
   ) {
     this.id = id;
     this.nome = nome;
     this.email = email;
     this.senha = senha;
+    this.confirmarSenha = confirmarSenha;
     this.cpf = cpf;
     this.dataNascimento = dataNascimento;
     this.telefone = telefone;
+    this.isUsuario = isUsuario;
+    this.isOng = isOng;
   }
 
   trocaSenha(senha: string) {

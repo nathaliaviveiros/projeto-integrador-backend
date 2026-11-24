@@ -2,20 +2,24 @@ import { Injectable } from '@nestjs/common';
 import { Usuario } from './usuario.entity.js';
 import {v4 as uuid} from 'uuid';
 import { alteraUsuarioDTO } from './dto/alteraUsuario.dto.js';
+import { criaUsuarioDTO } from './dto/criaUsuario.dto.js';
  
 @Injectable()
-export class usuariosCadastrados {
+export class usuariosService {
   #usuarios: Usuario[] = [];
  
-  adicionaUsuario(dadosUsuario: any) {
+  cadastrarUsuario(dadosUsuario: criaUsuarioDTO) {
     let usuario = new Usuario(
       uuid(),
       dadosUsuario.nome,
       dadosUsuario.email,
       dadosUsuario.senha,
+      dadosUsuario.confirmarSenha,
       dadosUsuario.cpf,
       dadosUsuario.dataNascimento,
       dadosUsuario.telefone,
+      dadosUsuario.isUsuario,
+      dadosUsuario.isOng
     );
  
     this.#usuarios.push(usuario);
@@ -41,6 +45,7 @@ export class usuariosCadastrados {
       usuario => usuario.email === email
     );
   }
+  
   async atualizaUsuario(id: string, dadosAtualizacao: alteraUsuarioDTO){
     let possivelUsuario = this.retornarUsuarioPorID(id);
     Object.entries(dadosAtualizacao).forEach(([chave,valor]) =>{

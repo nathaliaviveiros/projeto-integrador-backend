@@ -1,25 +1,44 @@
-import { IsEmail, IsNumber, IsString, MinLength } from 'class-validator';
- 
+import { IsBoolean, IsDefined, IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+
 export class criaUsuarioDTO {
 
   @IsString()
-    nome!: string;
-  
+  @IsNotEmpty()
+  nome: string;
+
   @IsEmail()
   @IsString()
-  email!: string;
+  @IsNotEmpty()
+  email: string;
 
   @MinLength(6)
   @IsString()
-    senha: string;
+  @IsNotEmpty()
+  senha: string;
 
   @IsString()
-    cpf: string;
- 
+  @IsNotEmpty()
+  confirmarSenha: string
+
   @IsString()
-    dataNascimento: string;
- 
- 
+  @IsNotEmpty()
+  cpf: string;
+
   @IsString()
-    telefone!: string;
+  @IsNotEmpty()
+  dataNascimento: string;
+
+  @IsString()
+  @IsNotEmpty()
+  telefone: string;
+
+  @IsBoolean()
+  @IsNotEmpty()
+  @IsDefined()
+  isUsuario: boolean;
+
+  @IsBoolean()
+  @IsNotEmpty()
+  @IsDefined()
+  isOng: boolean
 }

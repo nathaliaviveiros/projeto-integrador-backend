@@ -7,14 +7,14 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { usuariosCadastrados } from './usuario.service.js';
+import { usuariosService } from './usuario.service.js';
 import { criaUsuarioDTO } from './dto/criaUsuario.dto.js';
 import { alteraUsuarioDTO } from './dto/alteraUsuario.dto.js';
 import { LoginUsuarioDTO } from './dto/login.dto.js';
  
 @Controller('/usuarios')
 export class UsuarioController {
-  constructor(private usuarios: usuariosCadastrados) {}
+  constructor(private usuarios: usuariosService) {}
  
   @Post('/login')
   async loginUsuario(@Body() login: LoginUsuarioDTO) {
@@ -26,7 +26,6 @@ export class UsuarioController {
           id: usuario.id,
           nome: usuario.nome,
           email: usuario.email,
-          senha: usuario.senha,
           cpf: usuario.cpf,
           dataNascimento: usuario.dataNascimento,
           telefone: usuario.telefone,
@@ -40,9 +39,9 @@ export class UsuarioController {
     }
   }
  
-  @Post()
+  @Post('/cadastro')
   async cadastroUsuario(@Body() dadosUsuario: criaUsuarioDTO) {
-    let retorno = this.usuarios.adicionaUsuario(dadosUsuario);
+    let retorno = this.usuarios.cadastrarUsuario(dadosUsuario);
     if (retorno) {
       return {
         message: 'cadastro efetuado com sucesso',

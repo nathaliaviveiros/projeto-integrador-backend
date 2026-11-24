@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import {v4 as uuid} from 'uuid';
 import { Ong } from './ong.entity.js';
+import { criaOngDTO } from './dto/criaOng.dto.js';
+import { alteraOngDTO } from './dto/alteraOng.dto.js';
  
 @Injectable()
 export class ongCadastrados {

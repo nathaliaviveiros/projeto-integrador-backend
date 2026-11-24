@@ -8,6 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { adocaoCadastrados } from './adocao.service.js';
+import { criaAdocaoDTO } from './dto/criaAdocao.dto.js';
 
 
 @Controller('/adocao')

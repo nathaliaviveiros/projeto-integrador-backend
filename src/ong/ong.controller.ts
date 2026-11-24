@@ -8,6 +8,9 @@ import {
   Put,
 } from '@nestjs/common';
 import { ongCadastrados } from './ong.service.js';
+import { criaOngDTO } from './dto/criaOng.dto.js';
+import { LoginOngDTO } from './dto/loginOng.dto.js';
+import { alteraOngDTO } from './dto/alteraOng.dto.js';
 
  
 @Controller('/ong')

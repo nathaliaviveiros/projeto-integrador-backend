@@ -10,11 +10,17 @@ export class adocaoCadastrados {
   adicionaAdocao(dadosAdocao: any) {
     let adocao = new Adocao(
       uuid(),
-      dadosAdocao.id_pet,
-      dadosAdocao.id_ong,
-      dadosAdocao.id_usuario,
-      dadosAdocao.tutor,
-      dadosAdocao.data,
+  dadosAdocao.id_pet,
+  dadosAdocao.id_ong,
+  dadosAdocao.id_usuario,
+  dadosAdocao.espacoAdequado,
+  dadosAdocao.passeiosDiarios,
+  dadosAdocao.filhosMenores,
+  dadosAdocao.condicoesVeterinarias,
+  dadosAdocao.justificativa,
+  dadosAdocao.dataSolicitacao,
+
+
     );
 
     this.#adocao.push(adocao);
